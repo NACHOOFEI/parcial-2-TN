@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./src/style.css">
+    <title>Parcial 2 | Ignacio Orfei</title>
+  </head>
+  <body>
+    <header>
+      <h1>Explorador de Personajes - Rick and Morty API</h1>
+    </header>
+
+<div id="contenedor">
+  <div class="izq">
+    <a href="./src/index2.html" class="btn-volver">¿Qué es esta API?</a>
+    <button class="btn-volver" id="ver-favoritos">Ver Favoritos</button>
+  </div>
+
+  <div class="centro">
+    <input id="search" type="text" placeholder="Buscar personaje" autocomplete="off"/>
+    <button id="btnSearch">Buscar</button>
+  </div>
+
+  <div class="dere">
+    <select id="filtrado">
+      <option value="">Estado</option>
+      <option value="alive">Vivo</option>
+      <option value="dead">Muerto</option>
+      <option value="unknown">Desconocido</option>
+    </select>
+    <select id="ordenar">
+      <option value="">Orden</option>
+      <option value="A-Z">A-Z</option>
+      <option value="Z-A">Z-A</option>
+    </select>
+  </div>
+</div>
+
+
+<div id="app">
+</div>
+<div id="detalle-container" class="detalle oculto"></div>
+ 
+    <footer>
+      <p>Desarrollado por Ignacio Orfei | Parcial 2 - Programación Web</p>
+    </footer>
+
+    <script type="module" src="./src/main.js"></script>
+  </body>
+</html>

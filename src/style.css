@@ -1,0 +1,280 @@
+/* Reset básico */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Segoe UI", sans-serif;
+}
+
+body {
+  background-color: #1b1b1b;
+  color: #fff;
+  padding: 20px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header */
+header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+header h1 {
+  font-size: 26px;
+  color: #00ff9f;
+  text-shadow: 1px 1px 5px rgba(0, 255, 159, 0.4);
+}
+
+/* Contenedor de búsqueda */
+#contenedor {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 30px;
+  padding: 0 10px;
+}
+
+.izq,
+.centro,
+.dere {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.centro {
+  flex-grow: 1;
+  justify-content: center;
+}
+
+#search,
+#btnSearch,
+#filtrado,
+#ordenar {
+  padding: 10px;
+  font-size: 14px;
+  border-radius: 8px;
+  outline: none;
+  min-width: 100px;
+  max-width: 100%;
+}
+
+/* Input de búsqueda */
+#search {
+  border: 2px solid #00ff9f;
+  width: 100%;
+  max-width: 300px;
+  background-color: #111;
+  color: white;
+}
+
+/* Botones y selects */
+#btnSearch,
+#filtrado,
+#ordenar {
+  border: none;
+  background-color: #00ff9f;
+  color: #000;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+#btnSearch:hover,
+#filtrado:hover,
+#ordenar:hover {
+  background-color: #00cc80;
+}
+
+/* Botón volver */
+.btn-volver {
+  padding: 10px 16px;
+  background-color: #444;
+  color: #fff;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background 0.3s;
+  text-align: center;
+  display: inline-block;
+  border: 2px solid #00ff9f;
+}
+.btn-volver:hover {
+  background-color: #333;
+}
+
+/* Contenedor de tarjetas */
+#app {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  align-items: stretch;
+  flex-grow: 1;
+  padding: 0 10px;
+}
+
+/* Tarjeta de personaje */
+.cardUser {
+  background-color: #262626;
+  border: 2px solid #00ff9f;
+  border-radius: 12px;
+  padding: 12px;
+  text-align: center;
+  box-shadow: 0 0 15px rgba(0, 255, 159, 0.2);
+  transition: transform 0.2s;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto;
+
+  height: 100%;
+  min-height: 300px;
+  gap: 8px;
+}
+
+.cardUser:hover {
+  transform: scale(1.05);
+}
+
+.cardUser img {
+  width: 100%;
+  height: auto;
+  max-height: 160px;
+  object-fit: contain;
+  border-radius: 10px;
+  margin: 6px 0;
+}
+
+.cardUser h3 {
+  font-size: 18px;
+  color: #00ff9f;
+}
+
+.cardUser p {
+  font-size: 14px;
+  color: #ccc;
+}
+
+/* Mensaje de error */
+#app div p {
+  text-align: center;
+  font-size: 18px;
+  color: #ff7070;
+}
+
+/* Footer */
+footer {
+  margin-top: 40px;
+  text-align: center;
+  font-size: 14px;
+  color: #888;
+  padding: 10px;
+}
+
+/* Detalle */
+.detalle {
+  background-color: #111;
+  border: 2px solid #00ff9f;
+  padding: 20px;
+  border-radius: 12px;
+  max-width: 400px;
+  margin: 20px auto;
+  text-align: center;
+  box-shadow: 0 0 15px rgba(0, 255, 159, 0.2);
+}
+
+.detalle img {
+  width: 100%;
+  max-height: 250px;
+  object-fit: contain;
+  margin-bottom: 10px;
+}
+
+.detalle h2 {
+  color: #00ff9f;
+  margin-bottom: 5px;
+}
+
+.detalle p {
+  color: #ccc;
+  margin: 3px 0;
+}
+
+.oculto {
+  display: none;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  #search-container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .sc-left,
+  .sc-center,
+  .sc-right {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  #btnSearch,
+  #search,
+  #statusFilter,
+  #ordenar,
+  .btn-volver {
+    width: 100%;
+    max-width: 280px;
+  }
+
+  .cardUser h3 {
+    font-size: 16px;
+  }
+
+  .cardUser p {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 300px) {
+  header h1 {
+    font-size: 18px;
+  }
+
+  #btnSearch,
+  #search,
+  #statusFilter,
+  #ordenar,
+  .btn-volver {
+    font-size: 14px;
+    max-width: 260px;
+  }
+
+  .cardUser h3 {
+    font-size: 14px;
+  }
+
+  .cardUser p {
+    font-size: 12px;
+  }
+}
+
+.btn-fav {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: gold;
+}
+
+.cardUser {
+  position: relative;
+}
+

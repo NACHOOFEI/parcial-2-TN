@@ -1,0 +1,48 @@
+
+body {
+  background-color: #1b1b1b;
+  color: #fff;
+  padding: 20px;
+}
+
+.contenedor {
+  max-width: 800px;
+  margin: auto;
+  background-color: #262626;
+  padding: 20px;
+  border-radius: 12px;
+  color: #fff;
+}
+
+.contenedor h1 {
+  color: #00ff9f;
+  margin-bottom: 10px;
+}
+
+.contenedor ul {
+  margin-left: 20px;
+  list-style: disc;
+  margin-bottom: 20px;
+}
+
+#ejem {
+  background-color: #111;
+  padding: 10px;
+  border-radius: 8px;
+  color: #00ff9f;
+  font-size: 14px;
+  overflow-x: auto;
+}
+
+.btn-volver {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 20px;
+  background: #00ff9f;
+  color: #000;
+  text-decoration: none;
+  border-radius: 8px;
+}
+.btn-volver:hover {
+  background-color: #00cc80;
+}
