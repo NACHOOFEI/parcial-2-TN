@@ -1,48 +1,101 @@
-
 body {
   background-color: #1b1b1b;
   color: #fff;
-  padding: 20px;
+  padding: 5vw;
 }
 
 .contenedor {
+  width: 100%;
   max-width: 800px;
   margin: auto;
   background-color: #262626;
-  padding: 20px;
+  padding: 5vw;
   border-radius: 12px;
   color: #fff;
+  box-sizing: border-box;
 }
 
 .contenedor h1 {
   color: #00ff9f;
   margin-bottom: 10px;
+  font-size: 6vw;
 }
 
 .contenedor ul {
-  margin-left: 20px;
+  margin-left: 1.5rem;
   list-style: disc;
-  margin-bottom: 20px;
+  margin-bottom: 1.5rem;
+  font-size: 1rem;
 }
 
 #ejem {
   background-color: #111;
-  padding: 10px;
+  padding: 1rem;
   border-radius: 8px;
   color: #00ff9f;
-  font-size: 14px;
+  font-size: 0.9rem;
   overflow-x: auto;
 }
 
 .btn-volver {
   display: inline-block;
-  margin-top: 20px;
-  padding: 10px 20px;
+  margin-top: 1.5rem;
+  padding: 0.8rem 1.5rem;
   background: #00ff9f;
   color: #000;
   text-decoration: none;
   border-radius: 8px;
+  font-size: 1rem;
 }
+
 .btn-volver:hover {
   background-color: #00cc80;
+}
+
+
+@media (max-width: 600px) {
+  .contenedor {
+    padding: 4vw;
+  }
+
+  .contenedor h1 {
+    font-size: 5.5vw;
+    text-align: center;
+  }
+
+  .btn-volver {
+    width: 100%;
+    text-align: center;
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .contenedor {
+    padding: 3vw;
+  }
+
+  .contenedor h1 {
+    font-size: 5vw;
+  }
+
+  #ejem {
+    font-size: 0.8rem;
+    padding: 0.8rem;
+  }
+
+  .btn-volver {
+    font-size: 0.9rem;
+    padding: 0.7rem;
+  }
+}
+
+@media (max-width: 300px) {
+  .contenedor h1 {
+    font-size: 4.5vw;
+  }
+
+  .btn-volver {
+    font-size: 0.85rem;
+  }
 }
