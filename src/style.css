@@ -278,3 +278,41 @@ footer {
   position: relative;
 }
 
+/* Paginación */
+#paginacion {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  margin-top: 30px;
+  padding: 10px;
+}
+
+#paginacion button {
+  padding: 10px 20px;
+  background-color: #00ff9f;
+  border: none;
+  border-radius: 8px;
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  min-width: 100px;
+}
+
+#paginacion button:hover:not(:disabled) {
+  background-color: #00cc80;
+}
+
+#paginacion button:disabled {
+  background-color: #444;
+  color: #888;
+  cursor: not-allowed;
+}
+
+#pagina-actual {
+  font-weight: bold;
+  font-size: 16px;
+  color: #00ff9f;
+}

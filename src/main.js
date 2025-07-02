@@ -7,9 +7,14 @@ const button = document.getElementById("btnSearch");
 const filter = document.getElementById("filtrado");
 const ordenar = document.getElementById("ordenar");
 const btnFav = document.getElementById("ver-favoritos");
+const btnPrev = document.getElementById("prev");
+const btnNext = document.getElementById("next");
+const paginaActual = document.getElementById("pagina-actual");
 
 let personajesBase = []; // personajes obtenidos (búsqueda o todos)
 let personajesFiltrados = []; // personajes después del filtrados
+let currentPage = 1;
+let totalPages = 1;
 
 let favoritos = JSON.parse(localStorage.getItem("favoritos")) || [];//guarda el personaje favorito
 let mostrandoFavoritos = false;
@@ -56,48 +61,70 @@ cardUser.querySelector(".btn-fav").addEventListener("click", (e) => {
 }
 
 
-async function mostrarTodos() {//muestra todos los personajes 
+async function mostrarTodos(pagina = 1) {
   main.innerHTML = '';
   try {
-    const res = await fetch(apiUrl);
+    const res = await fetch(`${apiUrl}?page=${pagina}`);
     const data = await res.json();
     personajesBase = data.results;
+    totalPages = data.info.pages;
+    currentPage = pagina;
     aplicarFiltroYOrden();
+    actualizarPaginacion();
   } catch (e) {
     createCardErr("Error al cargar los personajes");
     console.error(e);
   }
 }
 
+
 mostrarTodos();//llamado a la funcion
 
 button.addEventListener("click", async (e) => {
-  e.preventDefault();//evento de para ejecutar la busqueda de personajes 
+  e.preventDefault();
+  const valorInput = search.value.trim().toLowerCase();
+  if (valorInput === "") {
+    mostrarTodos(1); // vuelve a modo normal
+    return;
+  }
+
   main.innerHTML = '';
   try {
-    const res = await fetch(apiUrl);
-    const data = await res.json();
-    const valorInput = search.value.trim().toLowerCase();
+    let resultados = [];
+    let pagina = 1;
+    let continuar = true;
 
-    if (valorInput !== "") {
-      personajesBase = data.results.filter(user =>
+    while (continuar) {
+      const res = await fetch(`${apiUrl}?page=${pagina}`);
+      const data = await res.json();
+      const coincidencias = data.results.filter(user =>
         user.name.toLowerCase().includes(valorInput)
       );
-    } else {
-      personajesBase = data.results;
+      resultados = resultados.concat(coincidencias);
+
+      if (!data.info.next) {
+        continuar = false;
+      } else {
+        pagina++;
+      }
     }
 
-    if (personajesBase.length === 0) {
+    personajesBase = resultados;
+    currentPage = 1;
+    totalPages = 1;
+    if (resultados.length === 0) {
       createCardErr("No se encontraron personajes con ese nombre");
     } else {
-      aplicarFiltroYOrden();//si busco personajes llamo a esta funcion para poder filtrarlos tambien 
+      aplicarFiltroYOrden();
     }
 
+    actualizarPaginacion();
   } catch (error) {
     createCardErr("Error al cargar los datos");
     console.error(error);
   }
 });
+
 
 search.addEventListener("keydown", (e) => {
   if (e.key === "Enter") {
@@ -168,9 +195,30 @@ function toggleFavorito(user) {//agregar o eliminar el personaje de favorito
   localStorage.setItem("favoritos", JSON.stringify(favoritos));
 }
 
-btnFav.addEventListener("click", () => {//muestra los favoritos y cambia el texto del btn 
+
+function actualizarPaginacion() {
+  paginaActual.textContent = `Página ${currentPage} de ${totalPages}`;
+  btnPrev.disabled = currentPage === 1;
+  btnNext.disabled = currentPage === totalPages;
+}
+btnNext.addEventListener("click", () => {
+  if (currentPage < totalPages) {
+    mostrarTodos(currentPage + 1);
+  }
+});
+
+btnPrev.addEventListener("click", () => {
+  if (currentPage > 1) {
+    mostrarTodos(currentPage - 1);
+  }
+});
+
+btnFav.addEventListener("click", () => {
   main.innerHTML = '';
   mostrandoFavoritos = !mostrandoFavoritos;
+
+  const paginacion = document.getElementById("paginacion");
+  paginacion.style.display = mostrandoFavoritos ? "none" : "flex";
 
   if (mostrandoFavoritos) {
     btnFav.textContent = "Volver";
@@ -181,6 +229,12 @@ btnFav.addEventListener("click", () => {//muestra los favoritos y cambia el text
     }
   } else {
     btnFav.textContent = "Ver Favoritos";
-    personajesBase.forEach(personaje => createCardUser(personaje));
+    filter.value = "";
+    ordenar.value = "";
+    mostrarTodos(currentPage);
+    setTimeout(() => {
+  paginacion.style.display = "flex";
+  paginacion.style.justifyContent = "center";
+}, 0);
   }
 });
